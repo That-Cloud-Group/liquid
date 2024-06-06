@@ -1,0 +1,5 @@
+black==24.4.2
+pylint==3.2.3
+pytest==8.2.2
+setuptools==70.0.0
+wheel==0.43.0
