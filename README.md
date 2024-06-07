@@ -17,7 +17,7 @@ Client: str service
 Client <-- CWP
 Client <-- SCS
 Client <-- CSPM
-Client <-- Admin
+Client <-- Settings
 
 CWP <-- ImageAssurancePolicy
 CWP: GetImage(name)
@@ -28,7 +28,12 @@ CWP: GetK8sAssurancePolicy()
 CWP: GetContainerRuntimePolicy()
 CWP: GetHostRuntimePolicy()
 
-Admin <-- ApplicationScopes
+Settings <-- ApplicationScopes
+Settings <-- Users
+Settings <-- PermissionSets
+Settings <-- Roles
+Settings <-- SSORoleMappings
+Settings <-- Labels
 
 ImageAssurancePolicy: Get()
 ImageAssurancePolicy: Create()
