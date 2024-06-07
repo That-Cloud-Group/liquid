@@ -12,3 +12,13 @@ class User:
         self.role = role
         self.roles = roles
         self.type = type
+    
+    def create(self):
+        return self
+    
+    def update(self):
+        return self
+    
+    def delete(self):
+        return self
+    
