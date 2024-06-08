@@ -2,7 +2,7 @@ from aqua import Aqua
 
 aqua_instance = Aqua(
     {
-        "type": "user",
+        "client_type": "user",
         "user": os.environ.get("AQUA_USER"),
         "password": os.environ.get("AQUA_PASS"),
         "url": os.environ.get("AQUA_URL"),

@@ -13,8 +13,10 @@ class AquaAuthentication:
     def authentication(self):
         if self.auth_options["type"] == "basic":
             self.authenticate_basic()
+            return self
         elif self.auth_options["type"] == "saas":
             self.authenticate_saas()
+            return self
 
     def authenticate_basic(self):
         if os.environ.get("AQUA_USER"):
