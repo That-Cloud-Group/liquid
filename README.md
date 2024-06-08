@@ -35,6 +35,35 @@ Settings <-- Roles
 Settings <-- SSORoleMappings
 Settings <-- Labels
 
+Users: str endpoint
+Users: str login_id
+Users: str name
+Users: str email
+Users: str password
+Users: bool first_time
+Users: bool is_super
+Users: bool ui_access
+Users: list actions
+Users: list scopes
+Users: str role
+Users: list roles
+Users: str user_type
+
+Roles: str name
+Roles: str description
+Roles: str author
+Roles: str updated
+Roles: str permission
+Roles: list scopes
+
+PermissionSets: str name
+PermissionSets: str description
+PermissionSets: str author
+PermissionSets: str updated
+PermissionSets: bool ui_access
+PermissionSets: bool is_super
+PermissionSets: list actions
+
 ImageAssurancePolicy: Get()
 ImageAssurancePolicy: Create()
 ImageAssurancePolicy: Update()
