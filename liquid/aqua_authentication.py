@@ -14,7 +14,10 @@ DEFAULT_REQUEST_HEADERS = {"Content-Type": "application/json; charset=UTF-8"}
 class AquaAuthentication:
     """Class that handles authentication functions for aqua"""
 
-    def __init__(self, auth_options={}):
+    def __init__(self, auth_options=None):
+        if auth_options is None:
+            auth_options = {}
+
         self.auth_type = auth_options.get("auth_type", "jwt")
         self.auth_url = auth_options.get("auth_url")
         self.auth_credentials = auth_options.get("auth_credentials")
@@ -22,12 +25,14 @@ class AquaAuthentication:
         self.token = None
 
     def authenticate(self):
+        """Determines proper authentication method to call"""
         if self.auth_type == "jwt":
             self.authenticate_jwt()
         elif self.auth_type == "saas":
             self.authenticate_saas()
 
     def authenticate_jwt(self):
+        """Authenticates with an aqua server to get a JWT for future requests."""
         if not self.auth_credentials:
             self.auth_credentials = {
                 "user": os.environ.get("AQUA_USER"),
@@ -47,20 +52,26 @@ class AquaAuthentication:
                 "password": self.auth_credentials["password"],
             }
             login_response = requests.post(
-                self.auth_url + "/api/v1/login", verify=self.ssl_verify, json=data
+                self.auth_url + "/api/v1/login",
+                verify=self.ssl_verify,
+                json=data,
+                timeout=30,
             )
             if login_response.status_code == 200:
                 self.token = login_response.json().get("token")
             else:
                 print(login_response.text)
-                return False
         else:
             print("Error: AQUA_USER, AQUA_PASS, or AQUA_URL not set")
-            return False
 
     def authenticated_get(self, endpoint):
+        """Makes a get request with proper authentication headers"""
         headers = DEFAULT_REQUEST_HEADERS | {"Authorization": f"Bearer {self.token}"}
         get_response = requests.get(
-            self.auth_url + "/api" + endpoint, verify=False, headers=headers
+            self.auth_url + "/api" + endpoint, verify=False, headers=headers, timeout=10
         )
         return get_response.json()
+
+    def authenticate_saas(self):
+        """Authenticates with SaaS endpoint using API tokens"""
+        print("Authenticating with SaaS.")

@@ -1,63 +1,33 @@
-import requests
-from liquid.aqua_authentication import AquaAuthentication
-import os
-
-""" Aqua client class.
+"""
+AquaCwp client class.
 Handles calling out to authenticate for API requests and forming request payloads
 """
 
+from liquid.aqua_authentication import AquaAuthentication
+
 
 class AquaCwp:
+    """Class for calling AquaCwp Specific methods."""
 
-    def __init__(self, client_options={}):
+    def __init__(self, client_options=None):
+        if client_options is None:
+            client_options = {}
         self.client_options = client_options
         self.auth_client = AquaAuthentication(client_options.get("auth_options", {}))
 
     def list_application_scopes(self):
+        """Lists application scopes in aqua, returning an array of scope data."""
         self.auth_client.authenticate()
         raw_scopes_response = self.auth_client.authenticated_get(
             "/v2/access_management/scopes"
         )
         return raw_scopes_response["result"]
 
-    def SaasCallAqua(self, method, path, data=None):
-        host = os.getenv("HOST")
-        if host:
-            token = self.auth.token
-            if token:
-                if method == "GET":
-                    r = requests.get(
-                        host + path, headers={"Authorization": "Bearer " + token}
-                    )
-                    return r
-                if method == "DELETE":
-                    r = requests.delete(
-                        host + path, headers={"Authorization": "Bearer " + token}
-                    )
-                    return r
-                if method == "POST":
-                    r = requests.post(
-                        host + path,
-                        json=data,
-                        headers={
-                            "Authorization": "Bearer " + token,
-                            "Content-Type": "application/json;charset=UTF-8",
-                        },
-                    )
-                    return r
-                if method == "PUT":
-                    r = requests.put(
-                        host + path,
-                        json=data,
-                        headers={
-                            "Authorization": "Bearer " + token,
-                            "Content-Type": "application/json;charset=UTF-8",
-                        },
-                    )
-                    return r
-            else:
-                print("Error calling Aqua")
-                return False
-        else:
-            print("Error: HOST not set")
-            return False
+    def get_affected_entries(self, application_scope_name=None):
+        """Get all entities affected by a specific application scope,
+        such as Aqua Policies and Services"""
+        self.auth_client.authenticate()
+        affected_entries = self.auth_client.authenticated_get(
+            f"/v2/access_management/scopes/{application_scope_name}/affected_entries"
+        )
+        return affected_entries

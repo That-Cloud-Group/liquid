@@ -1,7 +1,9 @@
+"""Entrypoint into liquid SDK"""
+
 import liquid.aqua_cwp
 
 
-def client(service, options={}):
+def client(service, options=None):
     """
     Creates a client class.
     service - a string representing the backend service (e.g. 'aqua_cwp', 'aqua_cspm')
@@ -15,5 +17,6 @@ def client(service, options={}):
                 - 'password' (string)
     """
     if service == "aqua_cwp":
-        aqua_cwp_client = aqua_cwp.AquaCwp(options)
+        aqua_cwp_client = liquid.aqua_cwp.AquaCwp(options)
         return aqua_cwp_client
+    return None
