@@ -27,13 +27,10 @@ class AquaAuthentication:
         password = os.environ.get("AQUA_PASS")
         url = os.environ.get("AQUA_URL")
         if user and password and url:
-            data = {
-                "id": user,
-                "password": password
-            }
-            r = requests.post(url + '/api/v1/login', json=data)
+            data = {"id": user, "password": password}
+            r = requests.post(url + "/api/v1/login", json=data)
             if r.status_code == 200:
-                self.token = r.json().get('token')
+                self.token = r.json().get("token")
             else:
                 print(r.text)
                 return False

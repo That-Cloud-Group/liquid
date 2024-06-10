@@ -3,11 +3,13 @@ class CategoryItem:
         self.expression = expression
         self.variables = variables
 
+
 class CategoryArtifacts:
     def __init__(self, image, function, pas_droplet):
         self.image = image
         self.function = function
         self.pas_droplet = pas_droplet
+
 
 class CategoryWorkloads:
     def __init__(self, os, kubernetes, cf):
@@ -15,10 +17,12 @@ class CategoryWorkloads:
         self.kubernetes = kubernetes
         self.cf = cf
 
+
 class CategoryInfrastructure:
     def __init__(self, kubernetes, os):
         self.kubernetes = kubernetes
         self.os = os
+
 
 class Categories:
     def __init__(self, artifacts, workloads, infrastructure, entity_scope):
@@ -27,6 +31,7 @@ class Categories:
         self.infrastructure = infrastructure
         self.entity_scope = entity_scope
 
+
 class ApplicationScope:
     def __init__(self, name, categories, description, author, updated):
         self.name = name
@@ -34,6 +39,7 @@ class ApplicationScope:
         self.description = description
         self.author = author
         self.updated = updated
+
 
 # Sample to create the objects
 # image_item = CategoryItem("v1", [{"attribute": "aqua.registry", "value": "Docker Hub", "name": ""}])

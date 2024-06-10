@@ -1,5 +1,7 @@
 class Role:
-    def __init__(self, name, description, author, updated, ui_access, is_super, actions):
+    def __init__(
+        self, name, description, author, updated, ui_access, is_super, actions
+    ):
         self.name = name
         self.description = description
         self.author = author
