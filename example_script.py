@@ -1,3 +1,5 @@
+"""Simple example script to test"""
+
 import liquid
 
 aqua_client = liquid.client("aqua_cwp", {"auth_options": {"ssl_verify": False}})

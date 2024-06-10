@@ -12,3 +12,8 @@ repos:
     rev: 24.4.2
     hooks:
     -   id: black
+-   repo: https://github.com/pylint-dev/pylint
+    rev: v3.2.3
+    hooks:
+      - id: pylint
+        name: pylint
