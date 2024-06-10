@@ -1,7 +1,6 @@
 import requests
-import aqua_authentication
+from liquid.aqua_authentication import AquaAuthentication
 import os
-import Services
 
 """ Aqua client class.
 Handles calling out to authenticate for API requests and forming request payloads
@@ -10,13 +9,16 @@ Handles calling out to authenticate for API requests and forming request payload
 
 class Aqua:
 
-    def __init__(self, auth_payload):
-        self.auth = aqua_authentication().authentication(auth_payload)
-        self.client_type = auth_payload["client_type"]
-        self.url = auth_payload["AQUA_URL"]
-        self.user = auth_payload["AQUA_USER"]
-        self.password = auth_payload["AQUA_PASS"]
-        self.sslVerify = auth_payload["AQUA_SSL_VERIFY"]
+    def __init__(self, client_options={}):
+        self.client_options = client_options
+        self.auth_client = AquaAuthentication(client_options.get("auth_options", {}))
+
+    def list_application_scopes(self):
+        self.auth_client.authenticate()
+        raw_scopes_response = self.auth_client.authenticated_get(
+            "/v2/access_management/scopes"
+        )
+        return raw_scopes_response["result"]
 
     def SaasCallAqua(self, method, path, data=None):
         host = os.getenv("HOST")

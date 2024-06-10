@@ -1,14 +1,19 @@
-from aqua import Aqua
+import liquid.aqua
 
-aqua_instance = Aqua(
-    {
-        "client_type": "user",
-        "user": os.environ.get("AQUA_USER"),
-        "password": os.environ.get("AQUA_PASS"),
-        "url": os.environ.get("AQUA_URL"),
-        "ssl_verify": os.environ.get("AQUA_SSL_VERIFY"),
-    }
-)
 
-client = aqua_instance.client("cwp")
-client.create_image_assurance_policy()
+def client(service, options={}):
+    """
+    Creates a client class.
+    service - a string representing the backend service (e.g. 'aqua_cwp', 'aqua_cspm')
+    options - a dictionary with possible keys:
+        - 'auth_options' (dict) : authentication options for client, alternatively via
+                                    ENV variables with keys:
+            - 'auth_type' (string) : authentication type (otherwise default auth used)
+            - 'auth_url' (string) : valid host URL
+            - 'auth_credentials' (dict) : credentials payload with keys:
+                - 'user' (string)
+                - 'password' (string)
+    """
+    if service == "aqua_cwp":
+        aqua_cwp_client = aqua.Aqua(options)
+        return aqua_cwp_client
