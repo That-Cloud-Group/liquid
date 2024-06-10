@@ -1,4 +1,4 @@
-import liquid.aqua
+import liquid.aqua_cwp
 
 
 def client(service, options={}):
@@ -15,5 +15,5 @@ def client(service, options={}):
                 - 'password' (string)
     """
     if service == "aqua_cwp":
-        aqua_cwp_client = aqua.Aqua(options)
+        aqua_cwp_client = aqua_cwp.AquaCwp(options)
         return aqua_cwp_client

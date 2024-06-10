@@ -7,7 +7,7 @@ Handles calling out to authenticate for API requests and forming request payload
 """
 
 
-class Aqua:
+class AquaCwp:
 
     def __init__(self, client_options={}):
         self.client_options = client_options
