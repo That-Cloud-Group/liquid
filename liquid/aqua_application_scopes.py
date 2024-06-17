@@ -23,3 +23,21 @@ class AquaApplicationScopes:
             f"{APPLICATION_SCOPE_URI}/{application_scope_name}/affected_entries"
         )
         return affected_entries
+
+    def validate_category_payload(self, categories):
+        """Determines if payload for categories is correctly formatted for API"""
+        if categories:
+            if "artifacts" in categories.keys():
+                return True
+        return False
+
+    def create_application_scope(self, name=None, categories=None, description=None):
+        """Creates a new application scope with name and category payload."""
+        self.validate_category_payload(categories)
+
+        created_application_scope = self.auth_client.authenticated_post(
+            APPLICATION_SCOPE_URI,
+            {"name": name, "categories": categories, "description": description},
+        )
+
+        return created_application_scope.json()

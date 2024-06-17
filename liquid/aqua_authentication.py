@@ -72,6 +72,18 @@ class AquaAuthentication:
         )
         return get_response.json()
 
+    def authenticated_post(self, endpoint, data):
+        """Makes a post request with proper authentication headers"""
+        headers = DEFAULT_REQUEST_HEADERS | {"Authorization": f"Bearer {self.token}"}
+        post_response = requests.post(
+            self.auth_url + "/api" + endpoint,
+            verify=False,
+            headers=headers,
+            json=data,
+            timeout=10,
+        )
+        return post_response.json()
+
     def authenticate_saas(self):
         """Authenticates with SaaS endpoint using API tokens"""
         print("Authenticating with SaaS.")
