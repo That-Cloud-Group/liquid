@@ -72,6 +72,17 @@ class AquaAuthentication:
         )
         return get_response.json()
 
+    def authenticated_delete(self, endpoint):
+        """Makes a delete request with proper authentication headers"""
+        headers = DEFAULT_REQUEST_HEADERS | {"Authorization": f"Bearer {self.token}"}
+        delete_response = requests.delete(
+            self.auth_url + "/api" + endpoint,
+            verify=False,
+            headers=headers,
+            timeout=10,
+        )
+        return delete_response
+
     def authenticated_post(self, endpoint, data):
         """Makes a post request with proper authentication headers"""
         headers = DEFAULT_REQUEST_HEADERS | {"Authorization": f"Bearer {self.token}"}
@@ -82,7 +93,19 @@ class AquaAuthentication:
             json=data,
             timeout=10,
         )
-        return post_response.json()
+        return post_response
+
+    def authenticated_put(self, endpoint, data):
+        """Makes a put request with proper authentication headers"""
+        headers = DEFAULT_REQUEST_HEADERS | {"Authorization": f"Bearer {self.token}"}
+        put_response = requests.put(
+            self.auth_url + "/api" + endpoint,
+            verify=False,
+            headers=headers,
+            json=data,
+            timeout=10,
+        )
+        return put_response
 
     def authenticate_saas(self):
         """Authenticates with SaaS endpoint using API tokens"""
