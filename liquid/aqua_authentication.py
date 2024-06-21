@@ -65,7 +65,7 @@ class AquaAuthentication:
                 self.auth_url + "/api/v1/login",
                 verify=self.ssl_verify,
                 json=data,
-                timeout=30,
+                timeout=5,
             )
             if login_response.status_code == 200:
                 self.token = login_response.json().get("token")
@@ -81,6 +81,41 @@ class AquaAuthentication:
             self.auth_url + "/api" + endpoint, verify=False, headers=headers, timeout=10
         )
         return get_response.json()
+
+    def authenticated_delete(self, endpoint):
+        """Makes a delete request with proper authentication headers"""
+        headers = DEFAULT_REQUEST_HEADERS | {"Authorization": f"Bearer {self.token}"}
+        delete_response = requests.delete(
+            self.auth_url + "/api" + endpoint,
+            verify=False,
+            headers=headers,
+            timeout=10,
+        )
+        return delete_response
+
+    def authenticated_post(self, endpoint, data):
+        """Makes a post request with proper authentication headers"""
+        headers = DEFAULT_REQUEST_HEADERS | {"Authorization": f"Bearer {self.token}"}
+        post_response = requests.post(
+            self.auth_url + "/api" + endpoint,
+            verify=False,
+            headers=headers,
+            json=data,
+            timeout=10,
+        )
+        return post_response
+
+    def authenticated_put(self, endpoint, data):
+        """Makes a put request with proper authentication headers"""
+        headers = DEFAULT_REQUEST_HEADERS | {"Authorization": f"Bearer {self.token}"}
+        put_response = requests.put(
+            self.auth_url + "/api" + endpoint,
+            verify=False,
+            headers=headers,
+            json=data,
+            timeout=10,
+        )
+        return put_response
 
     def authenticate_user_saas(self):
         """Authenticates with SaaS endpoint using API tokens"""
