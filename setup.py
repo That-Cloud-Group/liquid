@@ -7,7 +7,7 @@ distutils/setuptools install script.
 from setuptools import find_packages, setup
 
 setup(
-    name="boto3",
+    name="liquid",
     version="0.0.1",
     description="An SDK for Security Tooling",
     long_description="An SDK focused on automation for security tooling.",
