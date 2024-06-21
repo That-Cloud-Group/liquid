@@ -55,7 +55,7 @@ class AquaAuthentication:
                 self.auth_url + "/api/v1/login",
                 verify=self.ssl_verify,
                 json=data,
-                timeout=30,
+                timeout=5,
             )
             if login_response.status_code == 200:
                 self.token = login_response.json().get("token")
