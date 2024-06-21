@@ -2,7 +2,13 @@
 
 import liquid
 
+# Example auth with .env set credentials
 aqua_client = liquid.client("aqua_cwp", {"auth_options": {"ssl_verify": False}})
+
+# Example using passed in creds, get these programmatically, people!
+# aqua_client = liquid.client("aqua_cwp",
+# {"auth_options": {"ssl_verify": False,
+# "auth_credentials": {"user": "username", "password": "password"}}})
 
 # Low level examples
 

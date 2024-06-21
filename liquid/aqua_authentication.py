@@ -68,7 +68,10 @@ class AquaAuthentication:
         """Makes a get request with proper authentication headers"""
         headers = DEFAULT_REQUEST_HEADERS | {"Authorization": f"Bearer {self.token}"}
         get_response = requests.get(
-            self.auth_url + "/api" + endpoint, verify=False, headers=headers, timeout=10
+            self.auth_url + "/api" + endpoint,
+            verify=self.ssl_verify,
+            headers=headers,
+            timeout=10,
         )
         return get_response.json()
 
@@ -77,7 +80,7 @@ class AquaAuthentication:
         headers = DEFAULT_REQUEST_HEADERS | {"Authorization": f"Bearer {self.token}"}
         delete_response = requests.delete(
             self.auth_url + "/api" + endpoint,
-            verify=False,
+            verify=self.ssl_verify,
             headers=headers,
             timeout=10,
         )
@@ -88,7 +91,7 @@ class AquaAuthentication:
         headers = DEFAULT_REQUEST_HEADERS | {"Authorization": f"Bearer {self.token}"}
         post_response = requests.post(
             self.auth_url + "/api" + endpoint,
-            verify=False,
+            verify=self.ssl_verify,
             headers=headers,
             json=data,
             timeout=10,
@@ -100,7 +103,7 @@ class AquaAuthentication:
         headers = DEFAULT_REQUEST_HEADERS | {"Authorization": f"Bearer {self.token}"}
         put_response = requests.put(
             self.auth_url + "/api" + endpoint,
-            verify=False,
+            verify=self.ssl_verify,
             headers=headers,
             json=data,
             timeout=10,
