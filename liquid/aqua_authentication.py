@@ -35,8 +35,6 @@ class AquaAuthentication:
         """Determines proper authentication method to call"""
         if self.auth_type == "jwt":
             self.authenticate_jwt()
-        elif self.auth_type == "saas":
-            self.authenticate_user_saas()
         elif self.auth_type == "saas_api":
             self.authenticate_api_key_saas()
 
@@ -67,12 +65,33 @@ class AquaAuthentication:
                 json=data,
                 timeout=5,
             )
-            if login_response.status_code == 200:
-                self.token = login_response.json().get("token")
-            else:
-                print(login_response.text)
+            
+        elif (
+            self.auth_credentials["user"]
+            and self.auth_credentials["password"]
+        ):
+            # If no AQUA_URL is provided, then this is a SaaS login
+            print("No AQUA_URL provided. Assuming this is a SaaS User")
+            data = {
+                "email": self.auth_credentials["user"],
+                "password": self.auth_credentials["password"],
+            }
+            login_response = requests.post(
+                "https://api.cloudsploit.com/v2/signin",
+                verify=self.ssl_verify,
+                json=data,
+                timeout=30,
+                headers = {'Content-Type': 'application/x-www-form-urlencoded'}
+            )
         else:
             print("Error: AQUA_USER, AQUA_PASS, or AQUA_URL not set")
+        
+        if login_response.status_code == 200:
+            self.token = login_response.json().get("data").get("token")
+            self.auth_url = self.__get_token_endpoint()
+
+        else:
+            print(login_response.text)
 
     def authenticated_get(self, endpoint):
         """Makes a get request with proper authentication headers"""
@@ -116,38 +135,8 @@ class AquaAuthentication:
             timeout=10,
         )
         return put_response
-
-    def authenticate_user_saas(self):
-        """Authenticates with SaaS endpoint using API tokens"""
-        print("Authenticating with SaaS.")
-        if not self.auth_credentials:
-            self.auth_credentials = {
-                "user": os.environ.get("AQUA_USER"),
-                "password": os.environ.get("AQUA_PASS"),
-            }
-        if (
-            self.auth_credentials["user"]
-            and self.auth_credentials["password"]
-        ):
-            data = {
-                "email": self.auth_credentials["user"],
-                "password": self.auth_credentials["password"],
-            }
-            login_response = requests.post(
-                "https://api.cloudsploit.com/v2/signin",
-                verify=self.ssl_verify,
-                json=data,
-                timeout=30,
-                headers = {'Content-Type': 'application/x-www-form-urlencoded'}
-            )
-            if login_response.status_code == 200:
-                self.token = login_response.json().get("data").get("token")
-                print("Token generated")
-                self.auth_url=self.__get_token_endpoint()
-            else:
-                print(login_response.text)
     
-    def authenticate_api_key_saas(self, csp_roles: list = [], api_key: str = "", api_secret: str = "") -> dict:
+    def authenticate_api_key_saas(self) -> dict:
         """Authenticating to the Aqua API using api key and api secret instead of use-based auth
 
         Args:
@@ -155,36 +144,47 @@ class AquaAuthentication:
             api_key (str, optional): API_KEY generated upon api key creation. Defaults to "".
             api_secret (str, optional): API_SECRET generated upon api key creation. Defaults to "".
         """
-        api_key = api_key or os.environ.get("AQUA_API_KEY")
-        api_secret = api_secret or os.environ.get("AQUA_API_SECRET")
-        csp_roles = csp_roles or os.environ.get("AQUA_CSP_ROLES", "").split(",")
-        if not api_key or not api_secret:
+        print("Authenticating with API Key.")
+        if not self.api_credentials:
+            self.api_credentials = {
+                "api_key": os.environ.get("AQUA_API_KEY"),
+                "api_secret": os.environ.get("AQUA_API_SECRET"),
+                "csp_roles": os.environ.get("AQUA_CSP_ROLES", "").split(", "),
+                "api_actions": os.environ.get("AQUA_API_ACTIONS", "").split(", ")
+
+            }
+
+        if (
+            self.api_credentials["api_key"]
+            and self.api_credentials["api_secret"]
+            and self.api_credentials["csp_roles"]
+            and self.api_credentials["api_actions"]
+        ):
+            url = "https://api.cloudsploit.com/v2/tokens"
+            body = {
+                "validity":240,
+                "allowed_endpoints": self.api_credentials["api_actions"],
+                "csp_roles": self.api_credentials["csp_roles"]
+            }
+            headers = self.__generate_api_header_security(self.api_credentials["api_key"], self.api_credentials["api_secret"], url, body)
+            login_response = requests.post(
+                url,
+                verify=self.ssl_verify,
+                headers=headers,
+                data=body,
+                timeout=30,
+            )
+            if login_response.status_code == 200:
+                    self.token = login_response.json().get("data")
+                    self.auth_url = self.__get_token_endpoint()
+            else:
+                print(login_response.text)
+        elif not self.api_credentials["api_key"] or not self.api_credentials["api_secret"]:
             print("Error: AQUA_API_KEY or AQUA_API_SECRET not set")
-        if not csp_roles:
+        elif not self.api_credentials["csp_roles"]:
             print("Error: AQUA_CSP_ROLES not set")
-        url = "https://api.cloudsploit.com/v2/tokens"
-        body = {
-            "validity":240,
-            "allowed_endpoints": [
-                "DELETE",
-                "GET",
-                "POST",
-                "PUT",
-            ],
-            "csp_roles": csp_roles
-        }
-        headers = self.__generate_api_header_security(api_key, api_secret, url, body)
-        login_response = requests.post(
-            url,
-            verify=self.ssl_verify,
-            headers=headers,
-            data=body,
-            timeout=30,
-        )
-        if login_response.status_code == 200:
-                self.token = login_response.json().get("data")
-        else:
-            print(login_response.text)
+        elif not self.api_credentials["api_actions"]:
+            print("Error: AQUA_API_ACTIONS not set")
 
     def __generate_api_header_security(self, api_key, api_secret, url, body):
         body_str = json.dumps(body, separators=(',', ':'))
