@@ -78,7 +78,6 @@ class AquaAuthentication:
             }
             login_response = requests.post(
                 "https://api.cloudsploit.com/v2/signin",
-                verify=self.ssl_verify,
                 json=data,
                 timeout=30,
                 headers = {'Content-Type': 'application/x-www-form-urlencoded'}
