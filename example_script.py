@@ -9,7 +9,9 @@ if not os.getenv("AQUA_URL") and os.getenv("AQUA_USER"):
 
 elif not os.getenv("AQUA_URL") and os.getenv("AQUA_API_KEY"):
     # Saas with user-pass auth
-    AQUA_CLIENT = liquid.client("aqua_cwp", {"auth_options": {"auth_type": "saas_api", "ssl_verify": True}})
+    AQUA_CLIENT = liquid.client(
+        "aqua_cwp", {"auth_options": {"auth_type": "saas_api", "ssl_verify": True}}
+    )
 
 elif os.getenv("AQUA_URL") and os.getenv("AQUA_USER"):
     # this is for local aqua installation
