@@ -1,4 +1,5 @@
 """Pytest of the Aqua Authentication component"""
+
 from unittest.mock import Mock
 import pytest
 from liquid.aqua_authentication import AquaAuthentication

@@ -1,4 +1,5 @@
 """Pytest of the Aqua CWP Client"""
+
 from unittest.mock import Mock
 import pytest
 from liquid.aqua_cwp import AquaCwp
