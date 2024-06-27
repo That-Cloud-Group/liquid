@@ -25,3 +25,6 @@ jobs:
     - name: Analysing the formatting with black
       run: |
         black $(git ls-files '*.py')
+    - name: Unit testing with pytest
+      run: |
+        pytest
