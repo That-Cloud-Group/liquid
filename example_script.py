@@ -17,6 +17,7 @@ elif os.getenv("AQUA_URL") and os.getenv("AQUA_USER"):
     AQUA_CLIENT = liquid.client("aqua_cwp", {"auth_options": {"ssl_verify": False}})
 else:
     AQUA_CLIENT = None
+
 # Example using passed in creds, get these programmatically, people!
 # AQUA_CLIENT = liquid.client("aqua_cwp",
 # {"auth_options": {"ssl_verify": False,
@@ -40,6 +41,14 @@ if AQUA_CLIENT:
     test_delete_firewall_policy = AQUA_CLIENT.auth_client.authenticated_delete(
         "/v2/firewall_policies/test_firewall_policy"
     )
+    test_get_incidents = AQUA_CLIENT.incidents.get_incidents(options={})
+    print(len(test_get_incidents))
+    test_get_incident = AQUA_CLIENT.incidents.get_incident(incident_id=test_get_incidents[0]['id'])
+    print(test_get_incident)
+    test_list_suppression_rules = AQUA_CLIENT.incidents.list_suppression_rules(
+        options={}
+    )
+    print(len(test_list_suppression_rules))
 
     AQUA_CLIENT.auth_client.authenticated_delete("")
     scopes = AQUA_CLIENT.application_scopes.list_application_scopes()
