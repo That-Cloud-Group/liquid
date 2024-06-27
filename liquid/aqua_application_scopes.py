@@ -13,8 +13,17 @@ class AquaApplicationScopes:
 
     def list_application_scopes(self):
         """Lists application scopes in aqua, returning an array of scope data."""
-        raw_scopes_response = self.auth_client.authenticated_get(APPLICATION_SCOPE_URI)
-        return raw_scopes_response["result"]
+        scopes = self.auth_client.authenticated_get(APPLICATION_SCOPE_URI)
+        if int(scopes["count"]) > int(scopes["pagesize"]):
+            number_of_pages = int(scopes["count"]) // int(scopes["pagesize"])
+            for page in range(number_of_pages - 1):
+                more_scopes = self.auth_client.authenticated_get(
+                    f"{APPLICATION_SCOPE_URI}",
+                    params={"page": str(page + 2)},
+                )
+                scopes["result"] += more_scopes["result"]
+
+        return scopes["result"]
 
     def get_affected_entries(self, application_scope_name=None):
         """Get all entities affected by a specific application scope,
