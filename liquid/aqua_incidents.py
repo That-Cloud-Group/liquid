@@ -48,11 +48,11 @@ class AquaIncidents:
         # The options supported in timeline are:
         # search, type, interval, from_date, to_date and group_by
         raw_incident_response = self.auth_client.authenticated_get(
-            f"{INCIDENT_URI}/{incident_id}/{self.__format_incident_query(
+            f"""{INCIDENT_URI}/{incident_id}/{self.__format_incident_query(
                 options,
                 page=1,
                 pagesize="200",
-                skip_count=None)}"
+                skip_count=None)}"""
         )
         page_options = {"page": 1, "pagesize": "200", "skip_count": None}
         result = self.__page_records(
