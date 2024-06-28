@@ -28,11 +28,11 @@ class AquaIncidents:
     def get_incident_totals(self, options):
         """Get summary totals of incidents given the search criteria in options"""
         raw_incident_response = self.auth_client.authenticated_get(
-            f"{INCIDENT_URI}/totals{self.__format_incident_query(
+            f"""{INCIDENT_URI}/totals{self.__format_incident_query(
                 options,
                 page=1,
                 pagesize=None,
-                skip_count=None)}"
+                skip_count=None)}"""
         )
         return raw_incident_response
 
