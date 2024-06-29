@@ -32,6 +32,7 @@ class AquaAuthentication:
         self.api_credentials = auth_options.get("api_credentials")
         self.ssl_verify = auth_options.get("ssl_verify", True)
         self.token = None
+        self.saas = False
 
     def authenticate(self):
         """Determines proper authentication method to call"""
@@ -55,7 +56,7 @@ class AquaAuthentication:
         if (
             self.auth_credentials["user"]
             and self.auth_credentials["password"]
-            and self.auth_url
+            and self.auth_url and not self.saas
         ):
             data = {
                 "id": self.auth_credentials["user"],
@@ -71,6 +72,7 @@ class AquaAuthentication:
         elif self.auth_credentials["user"] and self.auth_credentials["password"]:
             # If no AQUA_URL is provided, then this is a SaaS login
             print("No AQUA_URL provided. Assuming this is a SaaS User")
+            self.saas = True
             data = {
                 "email": self.auth_credentials["user"],
                 "password": self.auth_credentials["password"],
@@ -82,20 +84,22 @@ class AquaAuthentication:
                 headers={"Content-Type": "application/x-www-form-urlencoded"},
             )
         else:
-            print("Error: AQUA_USER, AQUA_PASS, or AQUA_URL not set")
+            print("Error: AQUA_USER, AQUA_PASS not set")
             sys.exit(1)
         if login_response.status_code == 200:
             self.token = login_response.json().get("data").get("token")
             self.auth_url = self.__get_token_endpoint()
-
+            print("Authentication Successful")
         else:
             print(login_response.text)
+            print("Error: Authentication Failed")
 
-    def authenticated_get(self, endpoint):
+    def authenticated_get(self, endpoint, params=None):
         """Makes a get request with proper authentication headers"""
         headers = DEFAULT_REQUEST_HEADERS | {"Authorization": f"Bearer {self.token}"}
         get_response = requests.get(
             self.auth_url + "/api" + endpoint,
+            params=params,
             verify=self.ssl_verify,
             headers=headers,
             timeout=10,

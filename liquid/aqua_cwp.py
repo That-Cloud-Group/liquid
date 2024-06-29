@@ -5,6 +5,7 @@ Handles calling out to authenticate for API requests and forming request payload
 
 from liquid.aqua_authentication import AquaAuthentication
 from liquid.aqua_application_scopes import AquaApplicationScopes
+from liquid.aqua_incidents import AquaIncidents
 
 
 class AquaCwp:
@@ -18,3 +19,4 @@ class AquaCwp:
         self.client_options = client_options
         self.auth_client = AquaAuthentication(client_options.get("auth_options", {}))
         self.application_scopes = AquaApplicationScopes(self.auth_client)
+        self.incidents = AquaIncidents(self.auth_client)
