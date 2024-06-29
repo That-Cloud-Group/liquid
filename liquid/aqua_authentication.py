@@ -96,7 +96,12 @@ class AquaAuthentication:
             print("Error: Authentication Failed")
 
     def authenticated_get(self, endpoint, params=None):
-        """Makes a get request with proper authentication headers"""
+        """Makes a get request with proper authentication headers
+
+        :param endpoint: API endpoint (without /api prepended) that you plan to do a GET request to
+        :param params: Querystring parameters to send along with the GET request, requires a dict.
+        :returns: a dict of parsed JSON response from server.
+        """
         headers = DEFAULT_REQUEST_HEADERS | {"Authorization": f"Bearer {self.token}"}
         get_response = requests.get(
             self.auth_url + "/api" + endpoint,
@@ -108,7 +113,11 @@ class AquaAuthentication:
         return get_response.json()
 
     def authenticated_delete(self, endpoint):
-        """Makes a delete request with proper authentication headers"""
+        """Makes a delete request with proper authentication headers
+
+        :param endpoint: API endpoint (without /api) that you plan to do a DELETE request to
+        :returns: a DELETE response object.
+        """
         headers = DEFAULT_REQUEST_HEADERS | {"Authorization": f"Bearer {self.token}"}
         delete_response = requests.delete(
             self.auth_url + "/api" + endpoint,
@@ -119,7 +128,12 @@ class AquaAuthentication:
         return delete_response
 
     def authenticated_post(self, endpoint, data):
-        """Makes a post request with proper authentication headers"""
+        """Makes a post request with proper authentication headers
+
+        :param endpoint: API endpoint (without /api prepended) that you plan to do a POST request to
+        :param data: dictionary of data to send along with the POST request
+        :returns: a POST response object
+        """
         headers = DEFAULT_REQUEST_HEADERS | {"Authorization": f"Bearer {self.token}"}
         post_response = requests.post(
             self.auth_url + "/api" + endpoint,
@@ -131,7 +145,12 @@ class AquaAuthentication:
         return post_response
 
     def authenticated_put(self, endpoint, data):
-        """Makes a put request with proper authentication headers"""
+        """Makes a put request with proper authentication headers
+
+        :param endpoint: API endpoint (without /api prepended) that you plan to do a PUT request to
+        :param data: dictionary of data to send along with the PUT request
+        :returns: a PUT response object
+        """
         headers = DEFAULT_REQUEST_HEADERS | {"Authorization": f"Bearer {self.token}"}
         put_response = requests.put(
             self.auth_url + "/api" + endpoint,
@@ -201,6 +220,15 @@ class AquaAuthentication:
             print("Error: AQUA_API_ACTIONS not set")
 
     def __generate_api_header_security(self, api_key, api_secret, url, body):
+        """Creates proper security headers for requests.
+
+        :param api_key: string of key to make request with.
+        :param api_secret: string of secret to make request with.
+        :param url: full endpoint for the request
+        :param body: entire payload to be sent to the url
+        returns: dictionary of header information
+
+        """
         body_str = json.dumps(body, separators=(",", ":"))
         timestamp = str(int(time.time() * 1000))
         path = urlparse(url).path
