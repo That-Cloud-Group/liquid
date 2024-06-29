@@ -6,7 +6,7 @@
 
 VENV_BIN_PATH=./venv/bin
 
-all: clean
+all: lint
 clean:
 	rm -rf $(PWD)/build
 	rm -rf $(PWD)/dist

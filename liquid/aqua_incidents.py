@@ -3,6 +3,7 @@
 INCIDENT_URI = "/v2/incidents"
 SUPPRESSION_RULE_URI = f"{INCIDENT_URI}/suppression_rules"
 
+
 # pylint: disable=fixme
 class AquaIncidents:
     """Class to create methods for interacting with incident and suppression rules operations"""
@@ -113,11 +114,11 @@ class AquaIncidents:
         while len(result) < record_count:
             page += 1
             raw_response = self.auth_client.authenticated_get(
-            f"{INCIDENT_URI}{self.__format_incident_query(options, page, pagesize, skip_count)}"
-        )
-            #TODO Catch for non 200 response
+                f"{INCIDENT_URI}{self.__format_incident_query(options, page, pagesize, skip_count)}"
+            )
+            # TODO Catch for non 200 response
             if raw_response.get("result"):
-                result.extend(raw_response.get('result'))
+                result.extend(raw_response.get("result"))
             else:
                 break
         return result

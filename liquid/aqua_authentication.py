@@ -56,7 +56,8 @@ class AquaAuthentication:
         if (
             self.auth_credentials["user"]
             and self.auth_credentials["password"]
-            and self.auth_url and not self.saas
+            and self.auth_url
+            and not self.saas
         ):
             data = {
                 "id": self.auth_credentials["user"],
