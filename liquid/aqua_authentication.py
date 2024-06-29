@@ -94,11 +94,12 @@ class AquaAuthentication:
             print(login_response.text)
             print("Error: Authentication Failed")
 
-    def authenticated_get(self, endpoint):
+    def authenticated_get(self, endpoint, params=None):
         """Makes a get request with proper authentication headers"""
         headers = DEFAULT_REQUEST_HEADERS | {"Authorization": f"Bearer {self.token}"}
         get_response = requests.get(
             self.auth_url + "/api" + endpoint,
+            params=params,
             verify=self.ssl_verify,
             headers=headers,
             timeout=10,

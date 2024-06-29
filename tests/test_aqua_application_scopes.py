@@ -1,4 +1,5 @@
 """Pytest of the ApplicationScopes api"""
+
 from unittest.mock import Mock
 import pytest
 from liquid.aqua_authentication import AquaAuthentication
@@ -39,10 +40,24 @@ def test_list_application_scopes(application_scopes, mock_auth_client):
         application_scopes (AquaApplicationScopes): application scopes class
         mock_auth_client (Mock): Mock of the AquaAuthentication
     """
-    mock_response = {"result": [{"name": "test_scope"}]}
+    mock_response = {
+        "count": "20",
+        "pagesize": "50",
+        "result": [{"name": "test_scope"}],
+    }
     mock_auth_client.authenticated_get.return_value = mock_response
     scopes = application_scopes.list_application_scopes()
     assert scopes == [{"name": "test_scope"}]
+
+    mock_response_paginate = {
+        "count": "100",
+        "pagesize": "50",
+        "result": [{"name": "double"}],
+    }
+
+    mock_auth_client.authenticated_get.return_value = mock_response_paginate
+    paginated_scopes = application_scopes.list_application_scopes()
+    assert paginated_scopes == [{"name": "double"}, {"name": "double"}]
 
 
 def test_get_affected_entries(application_scopes, mock_auth_client):
