@@ -45,7 +45,9 @@ if AQUA_CLIENT:
     )
     test_get_incidents = AQUA_CLIENT.incidents.get_incidents(options={})
     print(len(test_get_incidents))
-    test_get_incident = AQUA_CLIENT.incidents.get_incident(incident_id=test_get_incidents[0]['id'])
+    test_get_incident = AQUA_CLIENT.incidents.get_incident(
+        incident_id=test_get_incidents[0]["id"]
+    )
     print(test_get_incident)
     test_list_suppression_rules = AQUA_CLIENT.incidents.list_suppression_rules(
         options={}
