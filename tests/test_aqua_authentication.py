@@ -57,7 +57,7 @@ def test_authenticate_jwt(auth_client, monkeypatch):
     """
     mock_response = Mock()
     mock_response.status_code = 200
-    mock_response.json.return_value = {"data": {"token": FAKE_TOKEN}}
+    mock_response.json.return_value = {"token": FAKE_TOKEN}
     monkeypatch.setenv("AQUA_USER", "test_user")
     monkeypatch.setenv("AQUA_PASS", "test_pass")
     monkeypatch.setenv("AQUA_URL", "https://example.com")

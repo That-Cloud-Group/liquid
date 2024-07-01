@@ -20,7 +20,10 @@ def mock_auth_client():
 
     return Mock(
         AquaAuthentication(
-            {"auth_credentials": {"user": "test_user", "password": "test_pass"}}
+            auth_options={
+                "auth_credentials": {"user": "test_user", "password": "test_pass"},
+                "auth_url": "https://example.com",
+            }
         )
     )
 
@@ -38,7 +41,8 @@ def cwp_client(mock_auth_client):
     return AquaCwp(
         client_options={
             "auth_options": {
-                "auth_credentials": {"user": "test_user", "password": "test_pass"}
+                "auth_credentials": {"user": "test_user", "password": "test_pass"},
+                "auth_url": "https://example.com",
             }
         }
     )
