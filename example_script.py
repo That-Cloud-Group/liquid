@@ -1,7 +1,10 @@
 """Simple example script to test"""
 
 import os
+from dotenv import load_dotenv
 import liquid
+
+load_dotenv()
 
 if not os.getenv("AQUA_URL") and os.getenv("AQUA_USER"):
     # Saas with user-pass auth
@@ -44,15 +47,17 @@ if AQUA_CLIENT:
         "/v2/firewall_policies/test_firewall_policy"
     )
     test_get_incidents = AQUA_CLIENT.incidents.get_incidents(options={})
-    print(len(test_get_incidents))
-    test_get_incident = AQUA_CLIENT.incidents.get_incident(
-        incident_id=test_get_incidents[0]["id"]
-    )
-    print(test_get_incident)
-    test_list_suppression_rules = AQUA_CLIENT.incidents.list_suppression_rules(
-        options={}
-    )
-    print(len(test_list_suppression_rules))
+    if test_get_incidents:
+        print(len(test_get_incidents))
+        test_get_incident = AQUA_CLIENT.incidents.get_incident(
+            incident_id=test_get_incidents[0]["id"]
+        )
+
+        print(test_get_incident)
+        test_list_suppression_rules = AQUA_CLIENT.incidents.list_suppression_rules(
+            options={}
+        )
+        print(len(test_list_suppression_rules))
 
     AQUA_CLIENT.auth_client.authenticated_delete("")
     scopes = AQUA_CLIENT.application_scopes.list_application_scopes()

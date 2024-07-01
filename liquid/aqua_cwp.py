@@ -18,5 +18,6 @@ class AquaCwp:
             client_options = {}
         self.client_options = client_options
         self.auth_client = AquaAuthentication(client_options.get("auth_options", {}))
+        self.auth_client.authenticate()
         self.application_scopes = AquaApplicationScopes(self.auth_client)
         self.incidents = AquaIncidents(self.auth_client)
