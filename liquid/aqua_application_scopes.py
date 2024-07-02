@@ -9,7 +9,6 @@ class AquaApplicationScopes:
 
     def __init__(self, auth_client):
         self.auth_client = auth_client
-        self.auth_client.authenticate()
 
     def list_application_scopes(self):
         """Lists application scopes in aqua, returning an array of scope data."""
