@@ -10,12 +10,10 @@ from urllib.parse import urlparse
 import jwt
 import urllib3
 import requests
-from dotenv import load_dotenv
 
 
 urllib3.disable_warnings(urllib3.exceptions.InsecureRequestWarning)
 
-load_dotenv()
 DEFAULT_REQUEST_HEADERS = {"Content-Type": "application/json; charset=UTF-8"}
 
 
@@ -56,7 +54,8 @@ class AquaAuthentication:
         if (
             self.auth_credentials["user"]
             and self.auth_credentials["password"]
-            and self.auth_url and not self.saas
+            and self.auth_url
+            and not self.saas
         ):
             data = {
                 "id": self.auth_credentials["user"],
@@ -68,6 +67,9 @@ class AquaAuthentication:
                 json=data,
                 timeout=5,
             )
+            if login_response.status_code == 200:
+                self.token = login_response.json().get("token")
+                print("Authentication Successful")
 
         elif self.auth_credentials["user"] and self.auth_credentials["password"]:
             # If no AQUA_URL is provided, then this is a SaaS login
@@ -83,16 +85,18 @@ class AquaAuthentication:
                 timeout=30,
                 headers={"Content-Type": "application/x-www-form-urlencoded"},
             )
+            if login_response.status_code == 200:
+                self.token = login_response.json().get("data").get("token")
+                self.auth_url = self.__get_token_endpoint()
+
         else:
             print("Error: AQUA_USER, AQUA_PASS not set")
             sys.exit(1)
-        if login_response.status_code == 200:
-            self.token = login_response.json().get("data").get("token")
-            self.auth_url = self.__get_token_endpoint()
-            print("Authentication Successful")
-        else:
+
+        if login_response.status_code != 200:
             print(login_response.text)
             print("Error: Authentication Failed")
+            sys.exit(1)
 
     def authenticated_get(self, endpoint, params=None):
         """Makes a get request with proper authentication headers"""

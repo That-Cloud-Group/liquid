@@ -26,4 +26,4 @@ lint: venv
 	$(VENV_BIN_PATH)/pylint ./liquid/
 
 build: venv
-	python setup.py install
+	python -m build
