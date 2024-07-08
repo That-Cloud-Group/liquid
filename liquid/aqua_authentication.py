@@ -172,6 +172,7 @@ class AquaAuthentication:
                 Defaults to [].
             api_key (str, optional): API_KEY generated upon api key creation. Defaults to "".
             api_secret (str, optional): API_SECRET generated upon api key creation. Defaults to "".
+
         """
         print("Authenticating with API Key.")
         if not self.api_credentials:
