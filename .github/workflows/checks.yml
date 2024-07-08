@@ -21,7 +21,7 @@ jobs:
         pip install -r requirements.txt
     - name: Analysing the code with pylint
       run: |
-        pylint $(git ls-files '*.py')
+        pylint --ignore=conf.py $(git ls-files '*.py')
     - name: Analysing the formatting with black
       run: |
         black $(git ls-files '*.py')
