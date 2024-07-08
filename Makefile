@@ -27,3 +27,7 @@ lint: venv
 
 build: venv
 	python -m build
+
+doc: venv
+	sphinx-apidoc -o ./doc/source/ ./liquid/
+	sphinx-build -M html ./doc/source/ ./doc/source/_build/
