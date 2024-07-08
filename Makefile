@@ -6,7 +6,7 @@
 
 VENV_BIN_PATH=./venv/bin
 
-all: clean
+all: lint
 clean:
 	rm -rf $(PWD)/build
 	rm -rf $(PWD)/dist
@@ -27,3 +27,7 @@ lint: venv
 
 build: venv
 	python -m build
+
+doc: venv
+	sphinx-apidoc -o ./doc/source/ ./liquid/
+	sphinx-build -M html ./doc/source/ ./doc/source/_build/

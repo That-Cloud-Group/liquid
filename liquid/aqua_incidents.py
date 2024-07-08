@@ -12,7 +12,14 @@ class AquaIncidents:
         self.auth_client = auth_client
 
     def get_incidents(self, options, page=1, pagesize="25", skip_count="false"):
-        """Get Incidents."""
+        """Get List of Incidents.
+
+        :param options:
+        :param page:
+        :param pagesize:
+        :param skip_count:
+        returns:
+        """
         raw_incident_response = self.auth_client.authenticated_get(
             f"{INCIDENT_URI}{self.__format_incident_query(options, page, pagesize, skip_count)}"
         )
@@ -26,7 +33,11 @@ class AquaIncidents:
         return result
 
     def get_incident_totals(self, options):
-        """Get summary totals of incidents given the search criteria in options"""
+        """Get summary totals of incidents given the search criteria in options
+
+        :param options:
+        returns:
+        """
         raw_incident_response = self.auth_client.authenticated_get(
             f"""{INCIDENT_URI}/totals{self.__format_incident_query(
                 options,
@@ -37,14 +48,24 @@ class AquaIncidents:
         return raw_incident_response
 
     def get_incident(self, incident_id):
-        """Get a specific incident details"""
+        """Get a specific incident details
+
+        :param incident_id:
+        returns:
+        """
         raw_incident_response = self.auth_client.authenticated_get(
             f"{INCIDENT_URI}/{incident_id}"
         )
         return raw_incident_response
 
     def get_incident_timeline(self, incident_id, options):
-        """gets the incident timeline for a specific incident"""
+        """Gets the incident timeline for a specific incident
+
+        :param incident_id:
+        :param options:
+        returns:
+
+        """
         # The options supported in timeline are:
         # search, type, interval, from_date, to_date and group_by
         raw_incident_response = self.auth_client.authenticated_get(
@@ -64,21 +85,36 @@ class AquaIncidents:
         return result
 
     def get_suppression_rule(self, rule_id):
-        """Get a specific suppression rule details"""
+        """Get a specific suppression rule details
+
+        :param rule_id:
+        returns:
+
+        """
         raw_response = self.auth_client.authenticated_get(
             f"{SUPPRESSION_RULE_URI}/{rule_id}"
         )
         return raw_response
 
     def delete_suppression_rule(self, rule_id):
-        """Deletes a specific suppression rule"""
+        """Deletes a specific suppression rule
+
+        :param rule_id:
+        returns:
+
+        """
         raw_response = self.auth_client.authenticated_delete(
             f"{SUPPRESSION_RULE_URI}/{rule_id}"
         )
         return raw_response.status_code == 200
 
     def list_suppression_rules(self, options):
-        """List all suppression rules"""
+        """List all suppression rules
+
+        :param options:
+        returns:
+
+        """
         # The options supported in list are search, enabled and order_by
         raw_response = self.auth_client.authenticated_get(
             f"{SUPPRESSION_RULE_URI}/list"
@@ -93,14 +129,22 @@ class AquaIncidents:
         return result
 
     def insert_suppression_rule(self, rule):
-        """Insert a suppression rule"""
+        """Insert a suppression rule
+
+        :param rule:
+        returns:
+        """
         raw_response = self.auth_client.authenticated_put(
             f"{SUPPRESSION_RULE_URI}/insert", data=rule
         )
         return raw_response.status_code == 200
 
     def update_suppression_rule(self, rule):
-        """Update a suppression rule"""
+        """Update a suppression rule
+
+        :param rule:
+        returns:
+        """
         raw_response = self.auth_client.authenticated_put(
             f"{SUPPRESSION_RULE_URI}/update", data=rule
         )

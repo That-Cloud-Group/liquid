@@ -17,4 +17,4 @@ repos:
     hooks:
       - id: pylint
         name: pylint
-        args: [--disable=import-error]
+        args: [--disable=import-error, --ignore=conf.py]
