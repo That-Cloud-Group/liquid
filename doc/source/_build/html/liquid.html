@@ -1,0 +1,440 @@
+<!DOCTYPE html>
+
+<html lang="en" data-content_root="./">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <title>liquid package &#8212; liquid  documentation</title>
+    <link rel="stylesheet" type="text/css" href="_static/pygments.css?v=d1102ebc" />
+    <link rel="stylesheet" type="text/css" href="_static/alabaster.css?v=12dfc556" />
+    <script src="_static/documentation_options.js?v=5929fcd5"></script>
+    <script src="_static/doctools.js?v=9a2dae69"></script>
+    <script src="_static/sphinx_highlight.js?v=dc90522c"></script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+
+  <link rel="stylesheet" href="_static/custom.css" type="text/css" />
+
+
+
+
+
+  </head><body>
+
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+
+
+          <div class="body" role="main">
+
+  <section id="liquid-package">
+<h1>liquid package<a class="headerlink" href="#liquid-package" title="Link to this heading">¶</a></h1>
+<section id="submodules">
+<h2>Submodules<a class="headerlink" href="#submodules" title="Link to this heading">¶</a></h2>
+</section>
+<section id="module-liquid.aqua_application_scopes">
+<span id="liquid-aqua-application-scopes-module"></span><h2>liquid.aqua_application_scopes module<a class="headerlink" href="#module-liquid.aqua_application_scopes" title="Link to this heading">¶</a></h2>
+<p>Module to handle all operations with application scopes</p>
+<dl class="py class">
+<dt class="sig sig-object py" id="liquid.aqua_application_scopes.AquaApplicationScopes">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">liquid.aqua_application_scopes.</span></span><span class="sig-name descname"><span class="pre">AquaApplicationScopes</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">auth_client</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#liquid.aqua_application_scopes.AquaApplicationScopes" title="Link to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></p>
+<p>Class to create methods for interacting with all application scope operations</p>
+<dl class="py method">
+<dt class="sig sig-object py" id="liquid.aqua_application_scopes.AquaApplicationScopes.create_application_scope">
+<span class="sig-name descname"><span class="pre">create_application_scope</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">name</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">categories</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">description</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#liquid.aqua_application_scopes.AquaApplicationScopes.create_application_scope" title="Link to this definition">¶</a></dt>
+<dd><p>Creates a new application scope with name and category payload.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="liquid.aqua_application_scopes.AquaApplicationScopes.delete_application_scope">
+<span class="sig-name descname"><span class="pre">delete_application_scope</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">application_scope_name</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#liquid.aqua_application_scopes.AquaApplicationScopes.delete_application_scope" title="Link to this definition">¶</a></dt>
+<dd><p>Deletes application scope by name</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="liquid.aqua_application_scopes.AquaApplicationScopes.get_affected_entries">
+<span class="sig-name descname"><span class="pre">get_affected_entries</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">application_scope_name</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#liquid.aqua_application_scopes.AquaApplicationScopes.get_affected_entries" title="Link to this definition">¶</a></dt>
+<dd><p>Get all entities affected by a specific application scope,
+such as Aqua Policies and Services</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="liquid.aqua_application_scopes.AquaApplicationScopes.get_application_scope">
+<span class="sig-name descname"><span class="pre">get_application_scope</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">application_scope_name</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#liquid.aqua_application_scopes.AquaApplicationScopes.get_application_scope" title="Link to this definition">¶</a></dt>
+<dd><p>Pulls information about given application scope.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="liquid.aqua_application_scopes.AquaApplicationScopes.list_application_scopes">
+<span class="sig-name descname"><span class="pre">list_application_scopes</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#liquid.aqua_application_scopes.AquaApplicationScopes.list_application_scopes" title="Link to this definition">¶</a></dt>
+<dd><p>Lists application scopes in aqua, returning an array of scope data.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="liquid.aqua_application_scopes.AquaApplicationScopes.list_available_categories">
+<span class="sig-name descname"><span class="pre">list_available_categories</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#liquid.aqua_application_scopes.AquaApplicationScopes.list_available_categories" title="Link to this definition">¶</a></dt>
+<dd><p>List all RBAC (Role-Based Access Control) categories</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="liquid.aqua_application_scopes.AquaApplicationScopes.update_application_scope">
+<span class="sig-name descname"><span class="pre">update_application_scope</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">name</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">categories</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">description</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#liquid.aqua_application_scopes.AquaApplicationScopes.update_application_scope" title="Link to this definition">¶</a></dt>
+<dd><p>Updates an existing application scope with name and category payload.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="liquid.aqua_application_scopes.AquaApplicationScopes.validate_category_payload">
+<span class="sig-name descname"><span class="pre">validate_category_payload</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">categories</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#liquid.aqua_application_scopes.AquaApplicationScopes.validate_category_payload" title="Link to this definition">¶</a></dt>
+<dd><p>Determines if payload for categories is correctly formatted for API</p>
+</dd></dl>
+
+</dd></dl>
+
+</section>
+<section id="module-liquid.aqua_authentication">
+<span id="liquid-aqua-authentication-module"></span><h2>liquid.aqua_authentication module<a class="headerlink" href="#module-liquid.aqua_authentication" title="Link to this heading">¶</a></h2>
+<p>Module that handles authentication to Aqua itself.</p>
+<dl class="py class">
+<dt class="sig sig-object py" id="liquid.aqua_authentication.AquaAuthentication">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">liquid.aqua_authentication.</span></span><span class="sig-name descname"><span class="pre">AquaAuthentication</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">auth_options</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#liquid.aqua_authentication.AquaAuthentication" title="Link to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></p>
+<p>Class that handles authentication functions for aqua</p>
+<dl class="py method">
+<dt class="sig sig-object py" id="liquid.aqua_authentication.AquaAuthentication.authenticate">
+<span class="sig-name descname"><span class="pre">authenticate</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#liquid.aqua_authentication.AquaAuthentication.authenticate" title="Link to this definition">¶</a></dt>
+<dd><p>Determines proper authentication method to call</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="liquid.aqua_authentication.AquaAuthentication.authenticate_api_key_saas">
+<span class="sig-name descname"><span class="pre">authenticate_api_key_saas</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">dict</span></span></span><a class="headerlink" href="#liquid.aqua_authentication.AquaAuthentication.authenticate_api_key_saas" title="Link to this definition">¶</a></dt>
+<dd><p>Authenticating to the Aqua API using api key and api secret instead of use-based auth</p>
+<dl>
+<dt>Args:</dt><dd><dl class="simple">
+<dt>csp_roles (list, optional): The Aqua role(s) to be associated with the token.</dt><dd><p>Defaults to [].</p>
+</dd>
+</dl>
+<p>api_key (str, optional): API_KEY generated upon api key creation. Defaults to “”.
+api_secret (str, optional): API_SECRET generated upon api key creation. Defaults to “”.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="liquid.aqua_authentication.AquaAuthentication.authenticate_jwt">
+<span class="sig-name descname"><span class="pre">authenticate_jwt</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#liquid.aqua_authentication.AquaAuthentication.authenticate_jwt" title="Link to this definition">¶</a></dt>
+<dd><p>Authenticates with an aqua server to get a JWT for future requests.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="liquid.aqua_authentication.AquaAuthentication.authenticated_delete">
+<span class="sig-name descname"><span class="pre">authenticated_delete</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">endpoint</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#liquid.aqua_authentication.AquaAuthentication.authenticated_delete" title="Link to this definition">¶</a></dt>
+<dd><p>Makes a delete request with proper authentication headers</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>endpoint</strong> – API endpoint (without /api) that you plan to do a DELETE request to</p>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>a DELETE response object.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="liquid.aqua_authentication.AquaAuthentication.authenticated_get">
+<span class="sig-name descname"><span class="pre">authenticated_get</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">endpoint</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">params</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#liquid.aqua_authentication.AquaAuthentication.authenticated_get" title="Link to this definition">¶</a></dt>
+<dd><p>Makes a get request with proper authentication headers</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>endpoint</strong> – API endpoint (without /api prepended) that you plan to do a GET request to</p></li>
+<li><p><strong>params</strong> – Querystring parameters to send along with the GET request, requires a dict.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>a dict of parsed JSON response from server.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="liquid.aqua_authentication.AquaAuthentication.authenticated_post">
+<span class="sig-name descname"><span class="pre">authenticated_post</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">endpoint</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">data</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#liquid.aqua_authentication.AquaAuthentication.authenticated_post" title="Link to this definition">¶</a></dt>
+<dd><p>Makes a post request with proper authentication headers</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>endpoint</strong> – API endpoint (without /api prepended) that you plan to do a POST request to</p></li>
+<li><p><strong>data</strong> – dictionary of data to send along with the POST request</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>a POST response object</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="liquid.aqua_authentication.AquaAuthentication.authenticated_put">
+<span class="sig-name descname"><span class="pre">authenticated_put</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">endpoint</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">data</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#liquid.aqua_authentication.AquaAuthentication.authenticated_put" title="Link to this definition">¶</a></dt>
+<dd><p>Makes a put request with proper authentication headers</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>endpoint</strong> – API endpoint (without /api prepended) that you plan to do a PUT request to</p></li>
+<li><p><strong>data</strong> – dictionary of data to send along with the PUT request</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>a PUT response object</p>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
+</section>
+<section id="module-liquid.aqua_cwp">
+<span id="liquid-aqua-cwp-module"></span><h2>liquid.aqua_cwp module<a class="headerlink" href="#module-liquid.aqua_cwp" title="Link to this heading">¶</a></h2>
+<p>AquaCwp client class.
+Handles calling out to authenticate for API requests and forming request payloads</p>
+<dl class="py class">
+<dt class="sig sig-object py" id="liquid.aqua_cwp.AquaCwp">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">liquid.aqua_cwp.</span></span><span class="sig-name descname"><span class="pre">AquaCwp</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">client_options</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#liquid.aqua_cwp.AquaCwp" title="Link to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></p>
+<p>Class for calling AquaCwp Specific methods.</p>
+</dd></dl>
+
+</section>
+<section id="module-liquid.aqua_incidents">
+<span id="liquid-aqua-incidents-module"></span><h2>liquid.aqua_incidents module<a class="headerlink" href="#module-liquid.aqua_incidents" title="Link to this heading">¶</a></h2>
+<p>Module to handle all operations with incidents and suppression rules</p>
+<dl class="py class">
+<dt class="sig sig-object py" id="liquid.aqua_incidents.AquaIncidents">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">liquid.aqua_incidents.</span></span><span class="sig-name descname"><span class="pre">AquaIncidents</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">auth_client</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#liquid.aqua_incidents.AquaIncidents" title="Link to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></p>
+<p>Class to create methods for interacting with incident and suppression rules operations</p>
+<dl class="py method">
+<dt class="sig sig-object py" id="liquid.aqua_incidents.AquaIncidents.delete_suppression_rule">
+<span class="sig-name descname"><span class="pre">delete_suppression_rule</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">rule_id</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#liquid.aqua_incidents.AquaIncidents.delete_suppression_rule" title="Link to this definition">¶</a></dt>
+<dd><p>Deletes a specific suppression rule</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>rule_id</strong></p>
+</dd>
+</dl>
+<p>returns:</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="liquid.aqua_incidents.AquaIncidents.get_incident">
+<span class="sig-name descname"><span class="pre">get_incident</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">incident_id</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#liquid.aqua_incidents.AquaIncidents.get_incident" title="Link to this definition">¶</a></dt>
+<dd><p>Get a specific incident details</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>incident_id</strong></p>
+</dd>
+</dl>
+<p>returns:</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="liquid.aqua_incidents.AquaIncidents.get_incident_timeline">
+<span class="sig-name descname"><span class="pre">get_incident_timeline</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">incident_id</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">options</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#liquid.aqua_incidents.AquaIncidents.get_incident_timeline" title="Link to this definition">¶</a></dt>
+<dd><p>Gets the incident timeline for a specific incident</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>incident_id</strong></p></li>
+<li><p><strong>options</strong></p></li>
+</ul>
+</dd>
+</dl>
+<p>returns:</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="liquid.aqua_incidents.AquaIncidents.get_incident_totals">
+<span class="sig-name descname"><span class="pre">get_incident_totals</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">options</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#liquid.aqua_incidents.AquaIncidents.get_incident_totals" title="Link to this definition">¶</a></dt>
+<dd><p>Get summary totals of incidents given the search criteria in options</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>options</strong></p>
+</dd>
+</dl>
+<p>returns:</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="liquid.aqua_incidents.AquaIncidents.get_incidents">
+<span class="sig-name descname"><span class="pre">get_incidents</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">options</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">page</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">1</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">pagesize</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'25'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">skip_count</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'false'</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#liquid.aqua_incidents.AquaIncidents.get_incidents" title="Link to this definition">¶</a></dt>
+<dd><p>Get List of Incidents.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>options</strong></p></li>
+<li><p><strong>page</strong></p></li>
+<li><p><strong>pagesize</strong></p></li>
+<li><p><strong>skip_count</strong></p></li>
+</ul>
+</dd>
+</dl>
+<p>returns:</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="liquid.aqua_incidents.AquaIncidents.get_suppression_rule">
+<span class="sig-name descname"><span class="pre">get_suppression_rule</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">rule_id</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#liquid.aqua_incidents.AquaIncidents.get_suppression_rule" title="Link to this definition">¶</a></dt>
+<dd><p>Get a specific suppression rule details</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>rule_id</strong></p>
+</dd>
+</dl>
+<p>returns:</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="liquid.aqua_incidents.AquaIncidents.insert_suppression_rule">
+<span class="sig-name descname"><span class="pre">insert_suppression_rule</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">rule</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#liquid.aqua_incidents.AquaIncidents.insert_suppression_rule" title="Link to this definition">¶</a></dt>
+<dd><p>Insert a suppression rule</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>rule</strong></p>
+</dd>
+</dl>
+<p>returns:</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="liquid.aqua_incidents.AquaIncidents.list_suppression_rules">
+<span class="sig-name descname"><span class="pre">list_suppression_rules</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">options</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#liquid.aqua_incidents.AquaIncidents.list_suppression_rules" title="Link to this definition">¶</a></dt>
+<dd><p>List all suppression rules</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>options</strong></p>
+</dd>
+</dl>
+<p>returns:</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="liquid.aqua_incidents.AquaIncidents.update_suppression_rule">
+<span class="sig-name descname"><span class="pre">update_suppression_rule</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">rule</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#liquid.aqua_incidents.AquaIncidents.update_suppression_rule" title="Link to this definition">¶</a></dt>
+<dd><p>Update a suppression rule</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>rule</strong></p>
+</dd>
+</dl>
+<p>returns:</p>
+</dd></dl>
+
+</dd></dl>
+
+</section>
+<section id="module-liquid">
+<span id="module-contents"></span><h2>Module contents<a class="headerlink" href="#module-liquid" title="Link to this heading">¶</a></h2>
+<p>Entrypoint into liquid SDK</p>
+<dl class="py function">
+<dt class="sig sig-object py" id="liquid.client">
+<span class="sig-prename descclassname"><span class="pre">liquid.</span></span><span class="sig-name descname"><span class="pre">client</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">service</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">options</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#liquid.client" title="Link to this definition">¶</a></dt>
+<dd><p>Creates a client class.
+service - a string representing the backend service (e.g. ‘aqua_cwp’, ‘aqua_cspm’)
+options - a dictionary with possible keys:</p>
+<blockquote>
+<div><ul>
+<li><dl>
+<dt>‘auth_options’ (dict)<span class="classifier">authentication options for client, alternatively via</span></dt><dd><blockquote>
+<div><p>ENV variables with keys:</p>
+</div></blockquote>
+<ul class="simple">
+<li><p>‘auth_type’ (string) : authentication type (otherwise default auth used)</p></li>
+<li><p>‘auth_url’ (string) : valid host URL</p></li>
+<li><dl class="simple">
+<dt>‘auth_credentials’ (dict)<span class="classifier">credentials payload with keys:</span></dt><dd><ul>
+<li><p>‘user’ (string)</p></li>
+<li><p>‘password’ (string)</p></li>
+</ul>
+</dd>
+</dl>
+</li>
+</ul>
+</dd>
+</dl>
+</li>
+</ul>
+</div></blockquote>
+</dd></dl>
+
+</section>
+</section>
+
+
+          </div>
+
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+<h1 class="logo"><a href="index.html">liquid</a></h1>
+
+
+
+
+
+
+
+
+<h3>Navigation</h3>
+
+<div class="relations">
+<h3>Related Topics</h3>
+<ul>
+  <li><a href="index.html">Documentation overview</a><ul>
+  </ul></li>
+</ul>
+</div>
+<search id="searchbox" style="display: none" role="search">
+  <h3 id="searchlabel">Quick search</h3>
+    <div class="searchformwrapper">
+    <form class="search" action="search.html" method="get">
+      <input type="text" name="q" aria-labelledby="searchlabel" autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false"/>
+      <input type="submit" value="Go" />
+    </form>
+    </div>
+</search>
+<script>document.getElementById('searchbox').style.display = "block"</script>
+
+
+
+
+
+
+
+
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="footer">
+      &#169;2024, ThatCloudGroup.
+
+      |
+      Powered by <a href="https://www.sphinx-doc.org/">Sphinx 7.3.7</a>
+      &amp; <a href="https://alabaster.readthedocs.io">Alabaster 0.7.16</a>
+
+      |
+      <a href="_sources/liquid.rst.txt"
+          rel="nofollow">Page source</a>
+    </div>
+
+
+
+
+  </body>
+</html>
