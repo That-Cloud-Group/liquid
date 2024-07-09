@@ -1,0 +1,35 @@
+[build-system]
+requires = ["setuptools"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "liquid-sdk"
+version = "0.0.2"
+dependencies = [
+  "requests",
+  "PyJWT"
+]
+requires-python = ">=3.8"
+authors = [
+  {name = "Richard Julian", email = "richard@thatcloudgroup.com"},
+  {name = "Jeremiah Owen", email = "jeremiah@thatcloudgroup.com"}
+  ]
+readme = "README.md"
+license = {text = "Apache License 2.0"}
+keywords = ["security", "tooling", "kubernetes", "cloud"]
+classifiers = [
+  "Programming Language :: Python"
+]
+
+[project.urls]
+Homepage = "https://github.com/That-Cloud-Group/liquid"
+Documentation = "https://github.com/That-Cloud-Group/liquid"
+Repository = "https://github.com/That-Cloud-Group/liquid"
+"Bug Tracker" = "https://github.com/That-Cloud-Group/liquid"
+Changelog = "https://github.com/That-Cloud-Group/liquid"
+
+[tool.setuptools.packages.find]
+# All the following settings are optional:
+where = ["."]  # ["."] by default
+include = ["liquid"]  # ["*"] by default
+namespaces = false  # true by default
