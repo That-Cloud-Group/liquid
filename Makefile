@@ -19,7 +19,8 @@ venv: ./venv/bin/activate
 	touch ./venv/bin/activate
 
 test: venv
-	$(VENV_BIN_PATH)/pytest
+	$(VENV_BIN_PATH)/coverage run -m pytest
+	$(VENV_BIN_PATH)/coverage report --fail-under=80
 
 lint: venv
 	$(VENV_BIN_PATH)/black ./liquid/

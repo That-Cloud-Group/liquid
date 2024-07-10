@@ -33,3 +33,15 @@ Changelog = "https://github.com/That-Cloud-Group/liquid"
 where = ["."]  # ["."] by default
 include = ["liquid"]  # ["*"] by default
 namespaces = false  # true by default
+
+[tool.pytest.ini_options]
+testpaths = "tests"  # directory containing your tests
+norecursedirs = [
+    "__pycache__"
+]
+
+
+[tool.coverage.run]
+omit = [
+    'tests/*'
+]

@@ -28,3 +28,6 @@ jobs:
     - name: Unit testing with pytest
       run: |
         pytest
+    - name: Coverage check
+      run: |
+        coverage report --fail-under=80
