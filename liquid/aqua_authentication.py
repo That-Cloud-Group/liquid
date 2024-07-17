@@ -26,6 +26,7 @@ class AquaAuthentication:
 
         self.auth_type = auth_options.get("auth_type", "jwt")
         self.auth_url = auth_options.get("auth_url")
+        self.scs_url = "https://codesec.aquasec.com/"
         self.auth_credentials = auth_options.get("auth_credentials")
         self.api_credentials = auth_options.get("api_credentials")
         self.ssl_verify = auth_options.get("ssl_verify", True)
@@ -98,7 +99,7 @@ class AquaAuthentication:
             print("Error: Authentication Failed")
             sys.exit(1)
 
-    def authenticated_get(self, endpoint, params=None):
+    def authenticated_get(self, resource, endpoint, params=None):
         """Makes a get request with proper authentication headers
 
         :param endpoint: API endpoint (without /api prepended) that you plan to do a GET request to
@@ -106,8 +107,12 @@ class AquaAuthentication:
         :returns: a dict of parsed JSON response from server.
         """
         headers = DEFAULT_REQUEST_HEADERS | {"Authorization": f"Bearer {self.token}"}
+        if resource == "cwp":
+            url = self.auth_url + "/api"
+        elif resource == "scs":
+            url = self.scs_url + "/api/v1"
         get_response = requests.get(
-            self.auth_url + "/api" + endpoint,
+            url + endpoint,
             params=params,
             verify=self.ssl_verify,
             headers=headers,
@@ -130,7 +135,7 @@ class AquaAuthentication:
         )
         return delete_response
 
-    def authenticated_post(self, endpoint, data):
+    def authenticated_post(self, resource, endpoint, data):
         """Makes a post request with proper authentication headers
 
         :param endpoint: API endpoint (without /api prepended) that you plan to do a POST request to
@@ -138,8 +143,12 @@ class AquaAuthentication:
         :returns: a POST response object
         """
         headers = DEFAULT_REQUEST_HEADERS | {"Authorization": f"Bearer {self.token}"}
+        if resource == "cwp":
+            url = self.auth_url + "/api"
+        elif resource == "scs":
+            url = self.scs_url + "/api/v1"
         post_response = requests.post(
-            self.auth_url + "/api" + endpoint,
+            url + endpoint,
             verify=self.ssl_verify,
             headers=headers,
             json=data,

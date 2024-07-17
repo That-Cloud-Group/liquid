@@ -12,12 +12,15 @@ class AquaApplicationScopes:
 
     def list_application_scopes(self):
         """Lists application scopes in aqua, returning an array of scope data."""
-        scopes = self.auth_client.authenticated_get(APPLICATION_SCOPE_URI)
+        scopes = self.auth_client.authenticated_get(
+            resource="cwp",
+            endpoint=APPLICATION_SCOPE_URI)
         if int(scopes["count"]) > int(scopes["pagesize"]):
             number_of_pages = int(scopes["count"]) // int(scopes["pagesize"])
             for page in range(number_of_pages - 1):
                 more_scopes = self.auth_client.authenticated_get(
-                    f"{APPLICATION_SCOPE_URI}",
+                    resource="cwp",
+                    endpoint=f"{APPLICATION_SCOPE_URI}",
                     params={"page": str(page + 2)},
                 )
                 scopes["result"] += more_scopes["result"]
@@ -28,7 +31,8 @@ class AquaApplicationScopes:
         """Get all entities affected by a specific application scope,
         such as Aqua Policies and Services"""
         affected_entries = self.auth_client.authenticated_get(
-            f"{APPLICATION_SCOPE_URI}/{application_scope_name}/affected_entities"
+            resource="cwp",
+            endpoint=f"{APPLICATION_SCOPE_URI}/{application_scope_name}/affected_entities"
         )
         return affected_entries
 
@@ -44,8 +48,9 @@ class AquaApplicationScopes:
         self.validate_category_payload(categories)
 
         created_application_scope = self.auth_client.authenticated_post(
-            APPLICATION_SCOPE_URI,
-            {"name": name, "categories": categories, "description": description},
+            resource="cwp",
+            endpoint=APPLICATION_SCOPE_URI,
+            params={"name": name, "categories": categories, "description": description},
         )
 
         return created_application_scope
@@ -53,7 +58,8 @@ class AquaApplicationScopes:
     def get_application_scope(self, application_scope_name):
         """Pulls information about given application scope."""
         application_scope_response = self.auth_client.authenticated_get(
-            f"{APPLICATION_SCOPE_URI}/{application_scope_name}"
+            resource="cwp",
+            endpoint=f"{APPLICATION_SCOPE_URI}/{application_scope_name}"
         )
         return application_scope_response
 
@@ -78,6 +84,7 @@ class AquaApplicationScopes:
     def list_available_categories(self):
         """List all RBAC (Role-Based Access Control) categories"""
         available_categories = self.auth_client.authenticated_get(
-            f"{ACCESS_MANAGEMENT_URI}/categories"
+            resource="cwp",
+            endpoint=f"{ACCESS_MANAGEMENT_URI}/categories"
         )
         return available_categories

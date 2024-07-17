@@ -11,12 +11,15 @@ class AquaUsers:
 
     def list_application_scopes(self):
         """Lists users in aqua, returning an array of"""
-        users = self.auth_client.authenticated_get(USER_URI)
+        users = self.auth_client.authenticated_get(
+            resource="cwp",
+            endpoint=USER_URI)
         if int(users["count"]) > int(users["pagesize"]):
             number_of_pages = int(users["count"]) // int(users["pagesize"])
             for page in range(number_of_pages - 1):
                 more_users = self.auth_client.authenticated_get(
-                    f"{USER_URI}",
+                    resource="cwp",
+                    endpoint=f"{USER_URI}",
                     params={"page": str(page + 2)},
                 )
                 users["result"] += more_users["result"]
