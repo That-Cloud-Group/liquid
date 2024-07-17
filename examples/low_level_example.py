@@ -13,5 +13,5 @@ load_dotenv()
 AQUA_CLIENT = liquid.client("aqua_cwp", {"auth_options": {"ssl_verify": True}})
 
 # Call the user management endpoint manually.
-user_info = AQUA_CLIENT.auth_client.authenticated_get("/v2/users")
+user_info = AQUA_CLIENT.auth_client.authenticated_get("cwp","/v2/users")
 print(user_info)

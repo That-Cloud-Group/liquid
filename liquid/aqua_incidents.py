@@ -22,7 +22,8 @@ class AquaIncidents:
         """
         raw_incident_response = self.auth_client.authenticated_get(
             resource="cwp",
-            endpoint=f"{INCIDENT_URI}{self.__format_incident_query(options, page, pagesize, skip_count)}"
+            endpoint=f"{INCIDENT_URI}\
+                {self.__format_incident_query(options, page, pagesize, skip_count)}",
         )
         page_options = {"page": page, "pagesize": pagesize, "skip_count": skip_count}
         result = self.__page_records(
@@ -45,7 +46,7 @@ class AquaIncidents:
                 options,
                 page=1,
                 pagesize=None,
-                skip_count=None)}"""
+                skip_count=None)}""",
         )
         return raw_incident_response
 
@@ -56,8 +57,7 @@ class AquaIncidents:
         returns:
         """
         raw_incident_response = self.auth_client.authenticated_get(
-            resource="cwp",
-            endpoint=f"{INCIDENT_URI}/{incident_id}"
+            resource="cwp", endpoint=f"{INCIDENT_URI}/{incident_id}"
         )
         return raw_incident_response
 
@@ -71,13 +71,13 @@ class AquaIncidents:
         """
         # The options supported in timeline are:
         # search, type, interval, from_date, to_date and group_by
-        raw_incident_response = self.auth_client.authenticated_get( 
+        raw_incident_response = self.auth_client.authenticated_get(
             resource="cwp",
             endpoint=f"""{INCIDENT_URI}/{incident_id}/{self.__format_incident_query(
                 options,
                 page=1,
                 pagesize="200",
-                skip_count=None)}"""
+                skip_count=None)}""",
         )
         page_options = {"page": 1, "pagesize": "200", "skip_count": None}
         result = self.__page_records(
@@ -96,8 +96,7 @@ class AquaIncidents:
 
         """
         raw_response = self.auth_client.authenticated_get(
-            resource="cwp",
-            endpoint=f"{SUPPRESSION_RULE_URI}/{rule_id}"
+            resource="cwp", endpoint=f"{SUPPRESSION_RULE_URI}/{rule_id}"
         )
         return raw_response
 
@@ -122,8 +121,7 @@ class AquaIncidents:
         """
         # The options supported in list are search, enabled and order_by
         raw_response = self.auth_client.authenticated_get(
-            resource="cwp",
-            endpoint=f"{SUPPRESSION_RULE_URI}/list"
+            resource="cwp", endpoint=f"{SUPPRESSION_RULE_URI}/list"
         )
         page_options = {"page": 1, "pagesize": "200", "skip_count": None}
         result = self.__page_records(
@@ -170,7 +168,7 @@ class AquaIncidents:
                         self.__format_incident_query(
                             options, page, pagesize, skip_count
                         )
-                    }
+                    },
                 )
                 # TODO Catch for non 200 response
                 if raw_response.get("result"):

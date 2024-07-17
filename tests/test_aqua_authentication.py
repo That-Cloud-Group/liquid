@@ -100,7 +100,7 @@ def test_authenticated_get(auth_client, monkeypatch):
     auth_client.token = FAKE_TOKEN
     auth_client.auth_url = "https://example.com"
 
-    response = auth_client.authenticated_get("/test")
+    response = auth_client.authenticated_get("cwp", "/test")
     assert response == {"test": "data"}
 
 

@@ -13,8 +13,8 @@ class AquaApplicationScopes:
     def list_application_scopes(self):
         """Lists application scopes in aqua, returning an array of scope data."""
         scopes = self.auth_client.authenticated_get(
-            resource="cwp",
-            endpoint=APPLICATION_SCOPE_URI)
+            resource="cwp", endpoint=APPLICATION_SCOPE_URI
+        )
         if int(scopes["count"]) > int(scopes["pagesize"]):
             number_of_pages = int(scopes["count"]) // int(scopes["pagesize"])
             for page in range(number_of_pages - 1):
@@ -32,7 +32,7 @@ class AquaApplicationScopes:
         such as Aqua Policies and Services"""
         affected_entries = self.auth_client.authenticated_get(
             resource="cwp",
-            endpoint=f"{APPLICATION_SCOPE_URI}/{application_scope_name}/affected_entities"
+            endpoint=f"{APPLICATION_SCOPE_URI}/{application_scope_name}/affected_entities",
         )
         return affected_entries
 
@@ -58,8 +58,7 @@ class AquaApplicationScopes:
     def get_application_scope(self, application_scope_name):
         """Pulls information about given application scope."""
         application_scope_response = self.auth_client.authenticated_get(
-            resource="cwp",
-            endpoint=f"{APPLICATION_SCOPE_URI}/{application_scope_name}"
+            resource="cwp", endpoint=f"{APPLICATION_SCOPE_URI}/{application_scope_name}"
         )
         return application_scope_response
 
@@ -84,7 +83,6 @@ class AquaApplicationScopes:
     def list_available_categories(self):
         """List all RBAC (Role-Based Access Control) categories"""
         available_categories = self.auth_client.authenticated_get(
-            resource="cwp",
-            endpoint=f"{ACCESS_MANAGEMENT_URI}/categories"
+            resource="cwp", endpoint=f"{ACCESS_MANAGEMENT_URI}/categories"
         )
         return available_categories

@@ -15,7 +15,7 @@ import requests
 urllib3.disable_warnings(urllib3.exceptions.InsecureRequestWarning)
 
 DEFAULT_REQUEST_HEADERS = {"Content-Type": "application/json; charset=UTF-8"}
-
+#pylint: disable=too-many-instance-attributes
 
 class AquaAuthentication:
     """Class that handles authentication functions for aqua"""
@@ -111,6 +111,8 @@ class AquaAuthentication:
             url = self.auth_url + "/api"
         elif resource == "scs":
             url = self.scs_url + "/api/v1"
+        else:
+            url = self.auth_url + "/api"
         get_response = requests.get(
             url + endpoint,
             params=params,
@@ -147,6 +149,8 @@ class AquaAuthentication:
             url = self.auth_url + "/api"
         elif resource == "scs":
             url = self.scs_url + "/api/v1"
+        else:
+            url = self.auth_url + "/api"
         post_response = requests.post(
             url + endpoint,
             verify=self.ssl_verify,

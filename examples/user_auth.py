@@ -14,13 +14,13 @@ load_dotenv()
 
 AQUA_CLIENT = liquid.client("aqua_cwp", {"auth_options": {"ssl_verify": False}})
 
-test_get_firewall_policy = AQUA_CLIENT.auth_client.authenticated_get(
+test_get_firewall_policy = AQUA_CLIENT.auth_client.authenticated_get("cwp",
     "/v2/firewall_policies"
 )
-test_post_firewall_policy = AQUA_CLIENT.auth_client.authenticated_post(
+test_post_firewall_policy = AQUA_CLIENT.auth_client.authenticated_post("cwp",
     "/v2/firewall_policies", {"name": "test_firewall_policy"}
 )
-test_get_one_firewall_policy = AQUA_CLIENT.auth_client.authenticated_get(
+test_get_one_firewall_policy = AQUA_CLIENT.auth_client.authenticated_get("cwp",
     "/v2/firewall_policies/test_firewall_policy"
 )
 test_put_firewall_policy = AQUA_CLIENT.auth_client.authenticated_put(
