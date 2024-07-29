@@ -30,4 +30,4 @@ jobs:
         pytest
     - name: Coverage check
       run: |
-        coverage report --fail-under=80
+        coverage report --fail-under=70

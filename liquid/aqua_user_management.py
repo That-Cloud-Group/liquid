@@ -9,7 +9,7 @@ class AquaUsers:
     def __init__(self, auth_client):
         self.auth_client = auth_client
 
-    def list_application_scopes(self):
+    def list_users(self):
         """Lists users in aqua, returning an array of"""
         users = self.auth_client.authenticated_get(USER_URI)
         if int(users["count"]) > int(users["pagesize"]):
