@@ -157,13 +157,11 @@ class AquaIncidents:
         if result:
             while len(result) < record_count:
                 page += 1
+                formatted_incident_query = self.__format_incident_query(
+                    options, page, pagesize, skip_count
+                )
                 raw_response = self.auth_client.authenticated_get(
-                    INCIDENT_URI
-                    + {
-                        self.__format_incident_query(
-                            options, page, pagesize, skip_count
-                        )
-                    }
+                    INCIDENT_URI + formatted_incident_query
                 )
                 # TODO Catch for non 200 response
                 if raw_response.get("result"):
