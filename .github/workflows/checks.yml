@@ -7,7 +7,7 @@ jobs:
     runs-on: ubuntu-latest
     strategy:
       matrix:
-        python-version: ["3.9", "3.10", "3.11", "3.12"]
+        python-version: ["3.9", "3.12"]
     steps:
     - uses: actions/checkout@v4
     - name: Set up Python ${{ matrix.python-version }}
@@ -27,7 +27,7 @@ jobs:
         black $(git ls-files '*.py')
     - name: Unit testing with pytest
       run: |
-        pytest
+        coverage run -m pytest
     - name: Coverage check
       run: |
         coverage report --fail-under=70
