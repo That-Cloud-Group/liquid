@@ -1,4 +1,5 @@
-# liquid
+# liquid ![Liquid Logo](./liquid.png)
+
 | :warning: WARNING           |
 |:----------------------------|
 | This SDK is in beta and will increment quickly to add in more functionality.     |
