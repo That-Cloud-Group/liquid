@@ -1,4 +1,6 @@
-# liquid ![Liquid Logo](./liquid.png)
+# liquid
+
+![Liquid Logo](./liquid.png)
 
 | :warning: WARNING           |
 |:----------------------------|
